@@ -1,0 +1,21 @@
+{
+    "name": "kirillbdev/laravel-media-manager",
+    "description": "Simple and flexible media manager for Laravel projects.",
+    "type": "package",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "kirillbdev",
+            "email": "kirill.babinec@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "laravel/framework": "^7.29"
+    },
+    "autoload": {
+        "psr-4": {
+            "kirillbdev\\MediaManager\\": "src/"
+        }
+    }
+}
