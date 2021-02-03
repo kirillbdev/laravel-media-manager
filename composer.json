@@ -13,9 +13,17 @@
     "require": {
         "laravel/framework": "^7.29"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5.8"
+    },
     "autoload": {
         "psr-4": {
             "kirillbdev\\MediaManager\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "kirillbdev\\MediaManager\\Tests\\": "tests/"
         }
     }
 }
