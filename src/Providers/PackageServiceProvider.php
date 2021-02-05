@@ -8,7 +8,9 @@ class PackageServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        $this->loadMigrationsFrom(__DIR__ . '/../../migrations');
         $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'kirillbdev-media-manager');
+        $this->loadRoutesFrom(__DIR__ . '/../routes.php');
 
         $this->publishes([
             __DIR__ . '/../../public' => public_path('vendor/kirillbdev/media-manager'),

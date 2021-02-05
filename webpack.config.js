@@ -4,7 +4,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   entry: {
-    'public/js/media-manager': './resources/js/entry.js'
+    '../../public/vendor/kirillbdev/media-manager/js/media-manager': './resources/js/entry.js'
   },
   output: {
       filename: '[name].min.js',
