@@ -2,7 +2,7 @@ language: php
 services:
     - mysql
 before_install:
-    - mysql -e 'CREATE DATABASE media-manager-test;'
+    - mysql -e 'CREATE DATABASE `media-manager-test`;'
 install:
     - composer install
 script:
