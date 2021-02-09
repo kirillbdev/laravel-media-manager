@@ -10,6 +10,5 @@ class MigrationsTest extends TestCase
     public function testTablesCreated()
     {
         $this->assertTrue(Schema::hasTable('attachments'));
-        $this->assertTrue(Schema::hasTable('attachment_directory'));
     }
 }
