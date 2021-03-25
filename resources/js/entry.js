@@ -3,15 +3,20 @@ import Vuex from 'vuex';
 import VueI18n from 'vue-i18n';
 
 import MediaManager from './components/media-manager.vue';
-import AppStore from './store/store';
+import Store from './store/index';
 
 Vue.use(Vuex);
 Vue.use(VueI18n);
 
-const store = new Vuex.Store(AppStore);
+const store = new Vuex.Store(Store);
 
-new Vue({
-  el: '#media-manager',
-  store,
-  render: (h) => h(MediaManager)
-});
+window.MediaManager = {
+  init (el) {
+    return new Vue({
+      el: `#${el}`,
+      store,
+      render: (h) => h(MediaManager)
+    });
+  }
+};
+

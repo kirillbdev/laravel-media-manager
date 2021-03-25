@@ -9,7 +9,7 @@
   import { mapState, mapActions } from 'vuex';
 
   export default {
-    mounted: function () {
+    mounted () {
       this.getFiles();
     },
     computed: mapState([

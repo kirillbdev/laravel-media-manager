@@ -13,7 +13,8 @@ class PackageServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../routes.php');
 
         $this->publishes([
-            __DIR__ . '/../../public' => public_path('vendor/kirillbdev/media-manager'),
-        ], 'public');
+            __DIR__ . '/../../public/assets' => public_path('vendor/kirillbdev/media-manager'),
+            __DIR__ . '/../../public/config/media-manager.php' => config_path('media-manager.php')
+        ], 'kirillbdev-media-manager');
     }
 }

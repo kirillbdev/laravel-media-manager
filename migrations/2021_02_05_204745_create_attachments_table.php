@@ -20,7 +20,7 @@ class CreateAttachmentsTable extends Migration
             $table->integer('parent_id')
                 ->index('parent_id');
             $table->string('name', 255);
-            $table->mediumText('path');
+            $table->text('path');
             $table->timestamps();
         });
     }
