@@ -18,7 +18,8 @@ class CreateAttachmentsTable extends Migration
             $table->string('hash', 32)
                 ->unique('hash');
             $table->integer('parent_id')
-                ->index('parent_id');
+                ->index('parent_id')
+                ->default(0);
             $table->string('name', 255);
             $table->text('path');
             $table->timestamps();

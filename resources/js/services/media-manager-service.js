@@ -1,21 +1,18 @@
 import axios from 'axios';
 
+import Storage from './storage';
+
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 export default {
-  getFiles (dir) {
-    return new Promise(function (resolve, reject) {
-        axios.get('media-manager/files', {
-          directory: dir
-        })
-          .then(function (response) {
-            if (response.data.success) {
-              resolve(response.data.data);
-            }
-            else {
-              reject();
-            }
-          });
+  async getFiles (pathId) {
+    return new Promise((resolve, reject) => {
+      const files = Storage.filter(item => item.parent_id === pathId);
+
+      resolve({
+        success: true,
+        data: files
+      });
     });
   },
   renameFile: function (formData) {

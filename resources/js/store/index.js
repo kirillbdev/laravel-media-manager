@@ -4,7 +4,7 @@ import actions from './actions';
 export default {
   state: {
     locked: false,
-    directoryId: '',
+    directoryId: 0,
     directoryName: '',
     files: []
   },

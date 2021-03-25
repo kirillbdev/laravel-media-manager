@@ -1,16 +1,16 @@
 import MediaManagerService from './../services/media-manager-service';
 
 export default {
-  getFiles ({ commit, state }) {
+  async getFiles ({ commit, state }) {
     commit('lock');
 
-    MediaManagerService.getFiles(state.directoryId)
-      .then(function (data) {
-        commit('setFiles', data.files);
-      })
-      .finally(function () {
-        commit('unlock');
-      });
+    const result = await MediaManagerService.getFiles(state.directoryId);
+
+    commit('unlock');
+
+    if (result.success) {
+      commit('setFiles', result.data);
+    }
   },
   loadFiles: ({commit}, dir) => {
     commit('setLoadingState');
