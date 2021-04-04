@@ -2,6 +2,8 @@
 
 namespace kirillbdev\MediaManager\Foundation;
 
+use kirillbdev\MediaManager\Exceptions\ScannerException;
+
 class Scanner
 {
     /**
@@ -14,7 +16,7 @@ class Scanner
      *
      * @param string $rootPath
      */
-    public function __construct($rootPath)
+    public function __construct(string $rootPath)
     {
         $this->rootPath = $rootPath;
     }
@@ -24,20 +26,17 @@ class Scanner
      *
      * @return \SplFileInfo[]
      */
-    public function scanDir($dir)
+    public function scanDir(string $dir)
     {
-        $files = glob("$dir/*");
+        if (false === file_exists($dir)) {
+            throw new ScannerException("Can't open directory $dir");
+        }
 
-        return array_map(function ($file) {
-            $info = new \SplFileInfo($file);
-            $path = $this->getRelativePath($info->getPath());
+        $files = scandir($dir);
 
-            return [
-                'hash' => md5($path . '/' . $info->getFilename()),
-                'name' => $info->getFilename(),
-                'path' => $path
-            ];
-        }, $files);
+        return array_values(array_filter($files, function ($file) {
+            return $file !== '.' && $file !== '..';
+        }));
     }
 
     /**

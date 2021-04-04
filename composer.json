@@ -14,7 +14,8 @@
         "laravel/framework": "^7.29"
     },
     "require-dev": {
-        "orchestra/testbench": "^5"
+        "orchestra/testbench": "^5",
+        "mikey179/vfsstream": "2.0.x-dev"
     },
     "autoload": {
         "psr-4": {
