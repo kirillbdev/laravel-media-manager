@@ -1,7 +1,10 @@
 <template>
   <div class="media-manager">
     <div v-if="locked" class="media-manager-loader">Locked</div>
-    <div v-for="file in files">{{ file.name }}</div>
+    <template v-for="file in files">
+        <div v-if="file.is_dir">{{ file.name }} [DIR]</div>
+        <div v-else>{{ file.name }}</div>
+    </template>
   </div>
 </template>
 

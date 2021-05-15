@@ -4,13 +4,10 @@ export default {
   async getFiles ({ commit, state }) {
     commit('lock');
 
-    const result = await MediaManagerService.getFiles(state.directoryId);
+    const files = await MediaManagerService.getFiles(state.directoryId);
 
     commit('unlock');
-
-    if (result.success) {
-      commit('setFiles', result.data);
-    }
+    commit('setFiles', files);
   },
   loadFiles: ({commit}, dir) => {
     commit('setLoadingState');

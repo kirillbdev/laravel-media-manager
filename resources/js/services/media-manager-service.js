@@ -6,14 +6,11 @@ axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 export default {
   async getFiles (pathId) {
-    return new Promise((resolve, reject) => {
-      const files = Storage.filter(item => item.parent_id === pathId);
+      const response = await axios.get('/media-manager/files');
 
-      resolve({
-        success: true,
-        data: files
-      });
-    });
+      if (response.data.success) {
+          return response.data.data;
+      }
   },
   renameFile: function (formData) {
     return new Promise(function (resolve, reject) {

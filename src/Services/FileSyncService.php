@@ -2,42 +2,27 @@
 
 namespace kirillbdev\MediaManager\Services;
 
-use kirillbdev\MediaManager\Foundation\Scanner;
+use Illuminate\Support\Facades\DB;
+use kirillbdev\MediaManager\Core\FileInfo;
+use kirillbdev\MediaManager\Model\Attachment;
 
 class FileSyncService
 {
     /**
-     * @var Scanner
+     * @param FileInfo[] $files
      */
-    private $scanner;
-
-    /**
-     * FileSyncService constructor.
-     *
-     * @param Scanner $scanner
-     */
-    public function __construct(Scanner $scanner)
+    public function syncFiles($files)
     {
-        $this->scanner = $scanner;
-    }
-
-    /**
-     * @param string $dir
-     */
-    public function syncFiles($dir)
-    {
-        $files = $this->scanner->scanDir($dir);
-        $result = [];
-
         foreach ($files as $file) {
-            $result[] = [
-                'hash' => md5($file->getPathname() . '/' . $file->getFilename()),
-                'name' => $file->getFilename(),
-                'path' => $file->getPath(),
-                'pathname' => dirname($file->getRealPath())
-            ];
-        }
+            $attachment = new Attachment([
+                'hash' => md5($file->getRealPath()),
+                'parent_id' => 0,
+                'name' => $file->getBasename(),
+                'extension' => $file->getExtension(),
+                'path' => $file->getBasename()
+            ]);
 
-        return $result;
+            $attachment->save();
+        }
     }
 }
