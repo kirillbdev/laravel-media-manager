@@ -21,6 +21,7 @@ class CreateAttachmentsTable extends Migration
                 ->index('parent_id')
                 ->default(0);
             $table->string('name', 255);
+            $table->string('extension', 10);
             $table->text('path');
             $table->timestamps();
         });
