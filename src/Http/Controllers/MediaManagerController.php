@@ -3,19 +3,15 @@
 namespace kirillbdev\MediaManager\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use kirillbdev\MediaManager\Core\Scanner;
-use kirillbdev\MediaManager\Services\FileSyncService;
+use kirillbdev\MediaManager\Services\MediaManagerService;
 
 class MediaManagerController extends Controller
 {
-    public function getFiles(Scanner $scanner, FileSyncService $fileSyncService)
+    public function getFiles(MediaManagerService $mediaManagerService)
     {
-        $files = $scanner->scanDir(public_path('image/uploads'));
-        $fileSyncService->syncFiles($files);
-
-        return response()->json([
+        return [
             'success' => true,
-            'data' => $files
-        ]);
+            'data' => $mediaManagerService->getFiles(public_path('image/uploads'))
+        ];
     }
 }

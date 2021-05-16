@@ -2,13 +2,15 @@
 
 namespace kirillbdev\MediaManager\Core;
 
+use kirillbdev\MediaManager\Utils;
+
 /**
  * Class FileInfo
  * @package kirillbdev\MediaManager\Core
  * @method getFilename
  * @method isDir
  */
-class FileInfo implements \JsonSerializable
+class FileInfo
 {
     /**
      * @var \SplFileInfo
@@ -33,13 +35,10 @@ class FileInfo implements \JsonSerializable
         return $this->splFileInfo->getBasename('.' . $this->splFileInfo->getExtension());
     }
 
-    public function jsonSerialize()
+    public function getRelativePath()
     {
-        return [
-            'name' => $this->splFileInfo->getFilename(),
-            'base_name' => $this->getBasename(),
-            'extension' => $this->splFileInfo->getExtension(),
-            'is_dir' => $this->splFileInfo->isDir()
-        ];
+        $nameLength = strlen($this->splFileInfo->getFilename());
+
+        return Utils::getRelativePath(substr($this->splFileInfo->getRealPath(), 0, -$nameLength));
     }
 }

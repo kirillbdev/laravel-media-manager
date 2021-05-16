@@ -15,7 +15,6 @@ class CreateAttachmentsTable extends Migration
     {
         Schema::create('attachments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('hash', 32)->unique('hash');
             $table->integer('parent_id')->index('parent_id')->default(0);
             $table->string('name', 255);
             $table->string('extension', 10)->nullable();

@@ -33,7 +33,6 @@ class FileSyncServiceTest extends TestCase
 
         $result = DB::table('attachments')
             ->first([
-                'hash',
                 'parent_id',
                 'name',
                 'extension',
@@ -42,11 +41,10 @@ class FileSyncServiceTest extends TestCase
 
         $this->assertNotNull($result);
         $this->assertEquals([
-            'hash' => md5($fileInfo->getRealPath()),
             'parent_id' => 0,
             'name' => $fileInfo->getBasename(),
             'extension' => $fileInfo->getExtension(),
-            'path' => $fileInfo->getBasename()
+            'path' => '/'
         ], (array)$result);
     }
 }
