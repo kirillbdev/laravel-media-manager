@@ -1,8 +1,9 @@
 language: php
+php:
+  - "8.0"
+  - "8.1"
 services:
     - mysql
-before_install:
-    - mysql -e 'CREATE DATABASE `media-manager-test`;'
 install:
     - composer install
 script:
