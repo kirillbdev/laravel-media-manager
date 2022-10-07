@@ -11,7 +11,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "laravel/framework": "^7.29"
+        "laravel/framework": "^8"
     },
     "require-dev": {
         "orchestra/testbench": "^5",
