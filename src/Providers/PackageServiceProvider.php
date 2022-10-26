@@ -14,7 +14,7 @@ class PackageServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../../public/assets' => public_path('vendor/kirillbdev/media-manager'),
-            __DIR__ . '/../../public/config/media-manager.php' => config_path('media-manager.php')
+            __DIR__ . '/../../public/config/media_manager.php' => config_path('media_manager.php')
         ], 'kirillbdev-media-manager');
     }
 }

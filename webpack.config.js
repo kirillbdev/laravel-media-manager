@@ -1,52 +1,42 @@
-let path = require('path');
-
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-
-let entries = {};
-
-function addEntry(src, dest) {
-  entries['../../public/vendor/kirillbdev/media-manager/js/' + dest] = src;
-  entries['public/assets/js/' + dest] = src;
-}
-
-addEntry('./resources/js/entry.js', 'media-manager');
+const {VueLoaderPlugin} = require('vue-loader');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path');
 
 module.exports = {
-  entry: entries,
+  entry: {
+    './public/assets/js/media-manager': './resources/js/entry.js',
+    './../../public/vendor/kirillbdev/media-manager/assets/media-manager': './resources/js/entry.js',
+  },
   output: {
-      filename: '[name].min.js',
-      path: path.resolve(__dirname, '')
+    filename: '[name].min.js',
+    path: path.resolve(__dirname, '')
   },
   plugins: [
     new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].min.css",
+    }),
   ],
   module: {
     rules: [
       {
         test: /\.vue$/,
-        use: 'vue-loader'
+        loader: 'vue-loader'
       },
       {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              [
-                '@babel/preset-env', {
-                  'targets': { 'node': 'current' }
-                }
-              ]
-            ]
-          }
-        }
-      }
+        test: /\.s[ac]ss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
+      },
     ]
   },
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+  resolve:
+    {
+      alias: {
+        store$: path.resolve(__dirname, 'resources/js/store/index.js'),
+      }
     }
-  }
 };

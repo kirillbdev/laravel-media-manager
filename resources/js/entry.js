@@ -1,22 +1,14 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import VueI18n from 'vue-i18n';
+import './../scss/main.scss';
 
-import MediaManager from './components/media-manager.vue';
-import Store from './store/index';
-
-Vue.use(Vuex);
-Vue.use(VueI18n);
-
-const store = new Vuex.Store(Store);
+import { createApp } from 'vue';
+import {createPinia} from 'pinia';
+import App from './App.vue';
 
 window.MediaManager = {
-  init (el) {
-    return new Vue({
-      el: `#${el}`,
-      store,
-      render: (h) => h(MediaManager)
-    });
-  }
+    init(el) {
+      const pinia = createPinia();
+      const app = createApp(App);
+      app.use(pinia);
+      app.mount('#' + el)
+    }
 };
-
